@@ -1,1 +1,9 @@
 /* This stylesheet is for your tested CSS, styles here will be deactivated when toggling wireframe style */
+
+.deprecated {
+	text-align: center;
+}
+
+#valid {
+	color: green;
+}
