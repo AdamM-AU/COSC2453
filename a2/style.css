@@ -13,8 +13,27 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Bangers', cursive;
+	font-weight: 200; /* Drop back the boldness a little */
+	
 }
 
+/* Header & targeted items in header */
+header {
+	display: flex;
+	align-items: center;
+
+}
+
+header > div.header-text {
+	padding-left: 20px;
+	font-size: 25px;
+	text-shadow: 2px 4px #808080;
+}
+
+.logo-img {
+	max-width: 100%;
+}
+/* END - Header */
 
 /* Small View - Mobiles */
 @media only screen and (min-width : 480px) {

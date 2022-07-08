@@ -15,7 +15,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Assignment 2</title>
+		<title>Lunardo Cinema's</title>
     
 		<!-- Keep wireframe.css for debugging, add your css to style.css -->
 		<link id='wireframecss' type="text/css" rel="stylesheet" href="../wireframe.css" disabled>
@@ -26,7 +26,12 @@
 	<body>
 
 		<header>
-			<div>Put company logo and name here</div>
+			<div class="header-logo">
+				<img class="logo-img" src="../../media/a2-logo.png">
+			</div>
+			<div class="header-text">
+				<h1>Lunardo Cinema's</h1>
+			</div>
 		</header>
 
 		<nav>
