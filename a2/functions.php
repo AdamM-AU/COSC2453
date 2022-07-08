@@ -16,5 +16,7 @@ function loadCSVArray( $filename ) {
 	fclose ($csv); // Close the file/file pointer
 	return $csvRows; // Return the array to the calling module
 }
+
+print_r(loadCSVArray("movies.csv"));
 	 
 ?>
