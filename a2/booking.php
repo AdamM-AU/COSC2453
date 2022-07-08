@@ -15,46 +15,86 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Lunardo Booking Page</title>
+		<title>Lunardo Cinema's - Bookings</title>
     
 		<!-- Keep wireframe.css for debugging, add your css to style.css -->
 		<link id='wireframecss' type="text/css" rel="stylesheet" href="../wireframe.css" disabled>
 		<link id='stylecss' type="text/css" rel="stylesheet" href="style.css?t=<?PHP echo filemtime("style.css"); // BAD PRACTICE: Not all systems allow PHP Short Tags "<? =" - Adam Mutimer ?>">
 		<script src='../wireframe.js'></script>
 	</head>
-	
 
 	<body>
-
 		<header>
-			<div>Put company logo and name here</div>
+			<div class="header-logo" id="home">
+				<img class="logo-img" src="../../media/a2-logo.png">
+			</div>
+			<div class="header-text">
+				<h1>Lunardo Cinema's</h1>
+			</div>
 		</header>
 
 		<nav>
-			<div>Put website navigation links here</div>
+			<ul id="navbar">
+				<li><a class="active" href="index.php">Home</a></li>
+			</ul>
 		</nav>
 
 		<main>
-			<article id='Website Under Construction'>
-				<!-- Creative Commons image sourced from https://pixabay.com/en/maintenance-under-construction-2422173/ and used for educational purposes only -->
-				<img src='../../media/website-under-construction.png' alt='Website Under Construction' />
-			</article>
+
+			<section class="movie" id="movie">
+				<div class="container">				
+					<?PHP
+					// Change Content based on 3 DIGIT code supplied in URL
+					if ($validCode = checkMovieCode($_GET['code']) == TRUE) {
+						$movie = getMovieByCode($_GET['code']);
+						echo "<h1 class=\"center booking-movie-title\">$movie[0]</h1>\n";
+						echo "\t\t\t\t\t" . "<h3 class=\"center\">Rating: $movie[6]</h3>\n";
+						echo "\t\t\t\t\t" . '<iframe style="display:block;" width="560" height="315" src="' . $movie[8] . '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' . "\n";
+						echo "\t\t\t\t\t" . "<p class=\"center\">$movie[9]</p>\n";						
+						
+					} else {
+						echo "<h1 class=\"center\">ERROR: MOVIE CODE INVALID!</h1>";
+					}
+					?>
+				</div>
+			</section>
+				<?PHP
+					// If Valid Code display this html
+					if ($validCode) {
+				?>
+			<section class="booking" id="booking">
+				<div class="container">				
+					// Booking Form
+				</div>
+			</section>					
+				<?PHP
+				}
+				?>
+				
 		</main>
 		
 		<footer>
-			<div>Copytight&copy; <?PHP echo date("Y"); // Use Servers Year for copyright ?>
+			<div class="table-grid-footer">
+				<div class="grid-item">info@lunardo.com.au</div>
+				<div class="grid-item">(03) 1234 1234</div>
+				<div class="grid-item">123 Smith Street,
+					<br>Johndoe, Victoria
+				</div>
+			</div>
+			<hr>
+			<div class="center">Copytight&copy; <?PHP echo date("Y"); // Use Servers Year for copyright ?>
 			<!--
 				// THIS IS BAD PRACTICE TO RELY ON THE DATE ON THE CLIENTS MACHINE - Adam Mutimer
 			<script>
-				document.write(new Date().getFullYear()); <!-- PHP Alternative: 
+				document.write(new Date().getFullYear()); PHP Alternative: 
 			</script> 
 			-->
-			- Adam Mutimer (s3875753). Last modified <?= date ("Y F d  H:i", filemtime($_SERVER['SCRIPT_FILENAME'])); ?>.
+			- Adam Mutimer (s3875753). Last modified <?= date ("Y F d  H:i", filemtime($_SERVER['SCRIPT_FILENAME'])); ?>, <a href="https://github.com/AdamM-AU/wp" target="_blank">GitHub Repository</a>.
 			</div>
-			<div>
+			<div class="center">
 				Disclaimer: This website is not a real website and is being developed as part of a School of Science Web Programming course at RMIT University in Melbourne, Australia.
 			</div>
-			<div>
+			<div class="center">
 				<button id='toggleWireframeCSS' onclick='toggleWireframe()'>Toggle Wireframe CSS</button>
 			</div>
 		</footer>

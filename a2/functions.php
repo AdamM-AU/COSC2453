@@ -20,5 +20,27 @@ function loadCSVArray( $filename ) {
 	fclose ($csv); // Close the file/file pointer
 	return $csvRows; // Return the array to the calling module
 }
-	 
+
+// Return True if valid movie code or False if invalid
+function checkMovieCode($movieCode) {
+	$array = loadCSVArray( "movies.csv" );
+	
+	foreach ($array as $row) {
+		$movieCodes[] = $row[1];
+	}
+	
+	return in_array($movieCode, $movieCodes, false);
+}
+
+// Fetch movie by movie code
+function getMovieByCode($movieCode) {
+	$array = loadCSVArray( "movies.csv" );
+	
+	foreach ($array as $row) {
+		if ($row[1] == $movieCode) {
+			$movie = $row;
+		}
+	}
+	return $movie;
+}
 ?>
