@@ -26,7 +26,7 @@
 	<body>
 
 		<header>
-			<div class="header-logo">
+			<div class="header-logo" id="header">
 				<img class="logo-img" src="../../media/a2-logo.png">
 			</div>
 			<div class="header-text">
@@ -39,10 +39,68 @@
 		</nav>
 
 		<main>
-			<article id='Website Under Construction'>
-				<!-- Creative Commons image sourced from https://pixabay.com/en/maintenance-under-construction-2422173/ and used for educational purposes only -->
-				<img src='../../media/website-under-construction.png' alt='Website Under Construction' />
-			</article>
+			<section class="home" id="home">
+				Shit user sees first
+			</section>
+			
+			<section class="seats-prices" id="seats-prices">
+				<h2>Seats &amp; Prices</h2>
+				<table class="seats-prices-table">
+					<tr>
+						<th>Seats</th>
+						<th>Price</th>
+						<th>Discounted Price</th>
+					</tr>
+					<?PHP
+					// Populate Table with CSV Data, Just for the heck of it...
+						$baseIndent = "\t\t\t\t\t\t";
+						$data = loadCSVArray("seatPricesTypes.csv");
+						
+						// Loop Array and write each row to the table
+						foreach ($data as $row) {
+							echo "\n" . $baseIndent . "<tr>\n";
+							echo $baseIndent . "\t<td>$row[0]</td>\n";
+							echo $baseIndent . "\t<td>$row[3]</td>\n";
+							echo $baseIndent . "\t<td>$row[2]</td>\n";
+							echo $baseIndent . "</tr>\n";
+						}
+					?>
+				</table>
+			</section>
+			
+			<section class="now-showing" id="now-showing">
+			<h2>Now Showing</h2>
+				<div class="table-grid-movies">
+				<?PHP
+				// Populate Table with CSV data, Just because we can....
+					$baseIndent = "\t\t\t\t\t\t";
+					$data = loadCSVArray("movies.csv");
+					
+					// Loop Array and write each array row as a grid item
+					foreach ($data as $row) {
+						echo "\n" . $baseIndent . "<div class=\"grid-item\">\n";
+
+						echo "\t" . $baseIndent . "<table>\n";
+						echo "\t\t" . $baseIndent . "<tr>\n";
+						echo "\t\t\t" . $baseIndent . "\t<td colspan=\"2\" class=\"movie-title\">$row[0]</td>\n";
+						echo "\t\t" . $baseIndent . "</tr>\n";
+						echo "\t\t" . $baseIndent . "<tr>\n";
+						echo "\t\t\t" . $baseIndent . "\t<td rowspan=\"2\"><img class=\"movie-poster\" src=\"../../media/a2/$row[7]\"></td>\n";
+						echo "\t\t\t" . $baseIndent . "\t<td>Rating: $row[6]</td>\n";
+						echo "\t\t" . $baseIndent . "</tr>\n";
+						echo "\t\t" . $baseIndent . "<tr>\n";
+						echo "\t\t\t" . $baseIndent . "\t<td colspan=\"2\"><a href=\"$row[5]\" target=\"_blank\">IMDB: Movie Information</a></td>\n";
+						echo "\t\t" . $baseIndent . "</tr>\n";						
+						echo "\t" . $baseIndent . "</table>\n";
+						
+						echo "\n" . $baseIndent . "</div>\n";
+					}
+				
+				?>
+				</div>
+				Movies
+				
+			</section>
 		</main>
 
 		<footer>

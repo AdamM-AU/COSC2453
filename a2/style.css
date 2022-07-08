@@ -33,19 +33,110 @@ header > div.header-text {
 .logo-img {
 	max-width: 100%;
 }
+
+footer {
+	bottom: 0;
+}
 /* END - Header */
 
 /* Small View - Mobiles */
 @media only screen and (min-width : 480px) {
-
+	body {
+		margin: 20px auto;
+		width:440px;
+	}
+	
+	.table-grid-movies {
+		margin: 20px auto;
+		width:600px;
+		background-color:#fff;
+		display:grid;
+		grid-template-columns: repeat(1, 1fr);
+		grid-row: auto auto;
+		grid-column-gap: 20px;
+		grid-row-gap: 20px;	
+	}
 }
 
 /* Medium View - Tabletss */
 @media only screen and (min-width : 768px) {
-
+	body {
+		margin: 20px auto;
+		width:728px;
+	}
+	
+	.table-grid-movies {
+		margin: 20px auto;
+		width:600px;
+		background-color:#fff;
+		display:grid;
+		grid-template-columns: repeat(1, 1fr);
+		grid-row: auto auto;
+		grid-column-gap: 20px;
+		grid-row-gap: 20px;	
+	}
 }
 
 /* Large View - Desktops / Laptops */
 @media only screen and (min-width : 992px) {
+	body {
+		margin: 20px auto;
+		width: 90vw;
+	}
+	
+	.table-grid-movies {
+		margin: 20px auto;
+		width:800px;
+		background-color:#fff;
+		display:grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-row: auto auto;
+		grid-column-gap: 20px;
+		grid-row-gap: 20px;	
+	}
 
+}
+
+
+.table-grid-movies .grid-item {
+	background-color: #333;
+	padding: 20px;
+	border-radius: 10px;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	/* justify-content: flex-start; */
+}
+
+table.seats-prices-table {
+	overflow-x:auto;
+}
+
+table.seats-prices-table td, tr {
+	text-align: center;
+}
+
+table.seats-prices-table td:first-child {
+	text-align: left;
+}
+
+.now-showing .movie-poster {
+	max-height: 240px;
+	max-width: 159.50px;
+}
+
+.now-showing td {
+	padding-left: 5px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.now-showing tr {
+	text-align: left;
+}
+
+.now-showing .movie-title {
+	padding-bottom: 10px;
+	font-size: 20px;
+	font-weight: bolder;/
 }
