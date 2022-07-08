@@ -1,6 +1,19 @@
 /* Oooo Custom Stylz */
 
+/* External Font Imports */
+/* Two fonts "Bangers" for headings and "Quicksand" for text */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Quicksand&display=swap');
+
+
+
 /* All Device Defaults */
+body {
+	font-family: 'Quicksand', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Bangers', cursive;
+}
 
 
 /* Small View - Mobiles */
