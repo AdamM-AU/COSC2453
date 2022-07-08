@@ -1,1 +1,19 @@
-/* Insert your styles here */
+/* Oooo Custom Stylz */
+
+/* All Device Defaults */
+
+
+/* Small View - Mobiles */
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Medium View - Tabletss */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Large View - Desktops / Laptops */
+@media only screen and (min-width : 992px) {
+
+}
