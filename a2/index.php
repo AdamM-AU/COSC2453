@@ -7,6 +7,8 @@
 	
 	// Its good practice to set the timezone when using date functions, also prevents php warnings - Adam Mutimer
 	date_default_timezone_set("Australia/Melbourne");
+	
+	require_once('functions.php'); // Special Functions - Adam Mutimer
 ?>
 <!DOCTYPE html>
 <html lang='en'>
