@@ -45,7 +45,7 @@
 				<div class="container center">
 					<?PHP
 					// Change Content based on 3 DIGIT code supplied in URL
-					$movieCode = htmlspecialchars(pg_escape_string($_GET['code'])); // Sanitize
+					$movieCode = htmlspecialchars($_GET['code']); // Sanitize
 					
 					if ($validCode = checkMovieCode($movieCode) == TRUE) {
 						$movie = getMovieByCode($movieCode);
