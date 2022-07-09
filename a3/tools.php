@@ -58,5 +58,72 @@
 		unset($array); // Unload from memory, garbage collector will do it when it's ready
 		return $movie;
 	}
+	
+	function createBooking($bookingData) {
+		$file = 'booking.csv';
+		
+		$csv = fopen($file, 'a+'); // Open the csv file, for write/appened/if non existant create file + read
+		
+		// Lock the file so no one else can touch it
+		if (flock($csv, LOCK_EX)) {
+			// File is locked continue
+			
+			// Get last row id - with out going though the entire csv line by line
+			$rows = file($file); // Even tho the file is locked we can still read it :)
+			$lastEnt = array_pop($rows); // Pops the array and returns last array item
+			$lastEntContent = str_getcsv($lastEnt); // Parse CSV string into an array
+			$lastID = $lastEntContent[1];
+			
+			// The last ID.. Like Magic :D
+			if (!is_numeric($lastID)) {
+				// if the lastID is not a number or numeric string then its the column title...
+				$newID = 0;
+			} else {
+				$lastID = intval($lastEntContent[1]);
+				$newID = (int)$lastID + 1; // Increment the lastID to give us the newID for this booking
+			}
+			
+			// Cleanup
+			unset($rows);
+			unset($lastEnt);
+			unset($lastEntContent);
+			unset($lastID);
+		
+			// Rebuild the array to add our booking id
+			$i = 0; // index counter
+			foreach ($bookingData as $item) {
+				if ($i == 1) {
+					$newBookingData[] = $newID;
+					$newBookingData[] = $item;
+					$i = $i + 2; // increment index counter by 2
+				} else {
+					$newBookingData[] = $item;
+					$i++;
+				}
+			}
+			
+			// Open target file
+			fputcsv($csv, $newBookingData, ","); // convert and push array in to csv, comma delimited
+			fflush($csv);
+			flock($csv,LOCK_UN); // Release the file lock
+			
+			fclose($csv); // Close file
 
+			// Cleanup
+			unset($i);
+			unset($bookingData);
+			unset($newBookingData);
+			unset($csv);
+			unset($file);
+			
+		} else {
+			fclose($csv); // Close file
+			// Couldnt lock file, return false so we can throw an error
+			return false;
+		}
+		
+		$_SESSION["myLastBookingID"] = $newID; // Set a session variable with the the users last bookingID
+		return $newID;
+	}
+	
 ?>
