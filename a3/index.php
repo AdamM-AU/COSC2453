@@ -8,7 +8,7 @@
 	// Its good practice to set the timezone when using date functions, also prevents php warnings - Adam Mutimer
 	date_default_timezone_set("Australia/Melbourne");
 	
-	require_once('functions.php'); // Special Functions - Adam Mutimer
+	require_once('tools.php'); // Special Functions - Adam Mutimer
 ?>
 <!DOCTYPE html>
 <html lang='en'>
@@ -86,12 +86,14 @@
 							$data = loadCSVArray("seatPricesTypes.csv");
 							
 							// Loop Array and write each row to the table
+							$i = 0; // Row counter
 							foreach ($data as $row) {
 								echo "\n" . $baseIndent . "<tr>\n";
-								echo $baseIndent . "\t<td>$row[0]</td>\n";
-								echo $baseIndent . "\t<td>$row[3]</td>\n";
-								echo $baseIndent . "\t<td>$row[2]</td>\n";
+								echo $baseIndent . "\t<td>" . $row["Seat Type"] . "</td>\n";
+								echo $baseIndent . "\t<td>" . $row["Normal Prices"] . "</td>\n";
+								echo $baseIndent . "\t<td>" . $row["Discounted Prices"] . "</td>\n";
 								echo $baseIndent . "</tr>\n";
+								$i++; // Increment row counter
 							}
 						?>
 					</table>
@@ -117,16 +119,16 @@
 								echo "\t\t\t" . $baseIndent . "<table class=\"table-grid-movies-subtable\">\n";
 
 								echo "\t\t\t\t" . $baseIndent . "<tr>\n";
-								echo "\t\t\t\t" . $baseIndent . "\t<td colspan=\"2\" class=\"movie-title\">$row[0]</td>\n";
+								echo "\t\t\t\t" . $baseIndent . "\t<td colspan=\"2\" class=\"movie-title\">" . $row["Movie Title"] . "</td>\n";
 								echo "\t\t\t\t" . $baseIndent . "</tr>\n";
 								
 								echo "\t\t\t\t" . $baseIndent . "<tr>\n";
-								echo "\t\t\t\t" . $baseIndent . "\t<td rowspan=\"2\"><img class=\"movie-poster\" src=\"../../media/a2/$row[7]\"></td>\n";
+								echo "\t\t\t\t" . $baseIndent . "\t<td rowspan=\"2\"><img class=\"movie-poster\" src=\"../../media/a2/" . $row["CoverImage"] . "\"></td>\n";
 								echo "\t\t\t\t" . $baseIndent . "\t<td></td>\n";
 								echo "\t\t\t\t" . $baseIndent . "</tr>\n";
 
 								echo "\t\t\t\t" . $baseIndent . "<tr>\n";
-								echo "\t\t\t\t" . $baseIndent . "\t<td colspan=\"2\">Rating: $row[6]</td>\n";
+								echo "\t\t\t\t" . $baseIndent . "\t<td colspan=\"2\">Rating: " . $row["Rating"] . "</td>\n";
 								echo "\t\t\t\t" . $baseIndent . "</tr>\n";		
 
 								echo "\t\t\t" . $baseIndent . "</table>\n";
@@ -137,26 +139,26 @@
 								
 								echo "<p>$row[9]</p>";
 								
-								if (empty($row[2])) {
+								if (empty($row["Mon - Tue"])) {
 									echo "Mon - Tue: No Sessions<br>";
 								} else {
-									echo "Mon - Tue: $row[2]<br>";
+									echo "Mon - Tue: " . $row["Mon - Tue"] . "<br>";
 								}
 
-								if (empty($row[3])) {
+								if (empty($row["Wed - Fri"])) {
 									echo "Wed - Fri: No Sessions<br>";
 								} else {
-									echo "Wed - Fri: $row[3]<br>";
+									echo "Wed - Fri: ". $row["Wed - Fri"] . "<br>";
 								}
 								
-								if (empty($row[2])) {
+								if (empty($row["Sat - Sun"])) {
 									echo "Sat - Sun: No Sessions<br>";
 								} else {
-									echo "Sat - Sun: $row[4]<br>";
+									echo "Sat - Sun: " . $row["Sat - Sun"] . "<br>";
 								}
 								
-								echo "<br><a href=\"$row[5]\" target=\"_blank\">IMDB: Movie Information</a>";
-								echo "<br><a href=\"booking.php?code=$row[1]\" target=\"_blank\">Book Now!</a>";
+								echo "<br><a href=\"" . $row["IMDB Link"] . "\" target=\"_blank\">IMDB: Movie Information</a>";
+								echo "<br><a href=\"booking.php?code=" . $row["CODE"] . "\" target=\"_blank\">Book Now!</a>";
 								
 								echo $baseIndent . "\t\t</div>\n";
 								

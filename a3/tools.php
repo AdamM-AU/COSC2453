@@ -18,17 +18,19 @@
 	// ADAM: Amend code to support 2D Keyed Array
 	function loadCSVArray( $filename ) {
 		$csv = fopen($filename, 'r'); // Open file "read only"
+		$headings = fgetcsv($csv, 1000, ','); // Fetch Headings
 		
 		while ( !feof($csv) ) { // Read $csv and check for "end of file (EOF)" until we get  "end of file (EOF)"
 			$row = fgetcsv($csv, 1000, ','); // Read each line of CSV into array $csvRows[], accept no more than 1000 lines, comma delimited
 			
 			if (!empty($row[0]) && !is_null($row[0])) { // Skip empty/blank rows
-				$csvRows[] = $row;
+				$csvRows[] = array_combine($headings, $row); // use headings as keys on level 2
 			}
 		}
 		
 		fclose ($csv); // Close the file/file pointer
 		unset($csv); // Unload from memory, garbage collector will do it when it's ready
+		unset($headings);
 		
 		return $csvRows; // Return the array to the calling module
 	}

@@ -54,7 +54,7 @@
 						echo "\t\t\t\t\t" . '<iframe style="display:block;" width="560" height="315" src="' . $movie[8] . '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' . "\n";
 						echo "\t\t\t\t\t" . "<p>$movie[9]</p><br>\n";					
 						echo "\t\t\t\t\t" . "<h3>The Cast:</h3>\n";
-						echo "\t\t\t\t\t" . "<p>$movie[10], $movie[11], $movie[12]</p><br>\n";
+						echo "\t\t\t\t\t" . "<p>$movie[10]</p><br>\n";
 						
 					} else {
 						echo "<h1 class=\"center\">ERROR: MOVIE CODE INVALID!</h1>";
