@@ -137,7 +137,7 @@
 								
 								echo $baseIndent . "\t\t<div class=\"grid-item-back\">\n";
 								
-								echo "<p>$row[9]</p>";
+								echo "<p>" . $row["Blip"] . "</p>";
 								
 								if (empty($row["Mon - Tue"])) {
 									echo "Mon - Tue: No Sessions<br>";
