@@ -1,0 +1,338 @@
+/* Oooo Custom Stylz */
+
+/* External Font Imports */
+/* Two fonts "Bangers" for headings and "Quicksand" for text */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Quicksand&display=swap');
+
+/* All Device Defaults */
+
+html {
+	scroll-behavior: smooth;
+}
+
+nav {
+	/* Sticky Navbar */
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	z-index: 1000; /* ALWAYS ON TOP OF OTHER CONTENT, EVEN MODALS */
+}
+
+nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+}
+
+nav li {
+	float: left;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+nav li a:hover {
+	background-color: #111;
+}
+
+body {
+	font-family: 'Quicksand', sans-serif;
+}
+
+section {
+		background-color: #F5F5F5;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Bangers', cursive;
+	font-weight: 200; /* Drop back the boldness a little */
+}
+
+h2 {
+	text-align: center;
+	font-size: 45px;
+}
+
+h3 {
+	font-size: 30px;
+}
+
+a:link, a:visited {
+	color: #6495ED;
+}
+
+
+iframe {
+    margin: 0 auto;
+	display: block;
+}	
+
+/* Header & targeted items in header */
+header {
+	display: flex;
+	align-items: center;
+
+}
+
+header > div.header-text {
+	padding-left: 20px;
+	font-size: 25px;
+	text-shadow: 2px 4px #808080;
+}
+
+.logo-img {
+	max-width: 100%;
+}
+
+footer {
+	bottom: 0;
+}
+
+/* END - Header */
+
+/* Small View - Mobiles */
+@media only screen and (min-width : 480px) {
+	.table-grid-movies {
+		margin: 20px auto;
+		width: 600px;
+		background-color: transparent;
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		grid-row: auto auto;
+		grid-column-gap: 20px;
+		grid-row-gap: 20px;	
+	}
+
+	.table-grid-footer {
+		margin: 20px auto;
+		width: 600px;
+		background-color: transparent;
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		grid-row: auto auto;
+		grid-column-gap: 20px;
+		grid-row-gap: 20px;	
+	}
+}
+
+/* Medium View - Tabletss */
+@media only screen and (min-width : 768px) {
+	.table-grid-movies {
+		margin: 20px auto;
+		width: 600px;
+		background-color: transparent;
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		grid-row: auto auto;
+		grid-column-gap: 20px;
+		grid-row-gap: 20px;	
+	}
+
+	.table-grid-footer {
+		margin: 20px auto;
+		width: 600px;
+		background-color: transparent;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-row: auto auto;
+		grid-column-gap: 20px;
+		grid-row-gap: 20px;	
+	}
+
+}
+
+/* Large View - Desktops / Laptops */
+@media only screen and (min-width : 992px) {
+	.table-grid-movies {
+		margin: 20px auto;
+		width: 800px;
+		background-color: transparent;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-row: auto auto;
+		grid-column-gap: 20px;
+		grid-row-gap: 20px;	
+		align-items: center;
+	}
+	
+	.table-grid-footer {
+		margin: 20px auto;
+		width: 800px;
+		background-color: transparent;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-row: auto auto;
+		grid-column-gap: 20px;
+		grid-row-gap: 20px;	
+		align-items: center;
+	}
+
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	overflow: auto;
+	padding: 0 40px;
+	min-height: 110vh;
+}
+
+.center {
+	text-align: center
+}
+
+.italic {
+	font-style: italic;
+}
+
+.table-grid-footer .grid-item {
+	background-color: transparent;
+	padding: 20px;
+	border-radius: 10px;
+	color: #000;
+}
+
+.table-grid-movies .grid-item {
+	background-color: transparent;
+	padding: 20px;
+	border-radius: 10px;
+	color: #fff;
+	width: 350px;
+	height: 350px;
+	perspective: 1000px;
+}
+
+.table-grid-movies .grid-item-inner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	transition: transform 0.6s;
+	transform-style: preserve-3d;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.table-grid-movies .grid-item:hover .grid-item-inner {
+	transform: rotateY(180deg);
+}
+
+.table-grid-movies .grid-item-front,.table-grid-movies .grid-item-back {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.table-grid-movies .grid-item-front {
+	display: flex;
+	background-color: #333;
+	color: white;
+}
+
+.table-grid-movies .grid-item-back {
+	background-color: #bbb;
+	color: white;
+	transform: rotateY(180deg);
+}
+
+
+.table-grid-movies-subtable {
+	margin: 0 auto;
+	width: 100%;
+	padding: 20px;
+}
+
+.seats-prices img {
+	max-height: 250px;
+}
+
+table.seats-prices-table {
+	overflow-x:auto;
+	margin: 0 auto;
+}
+
+table.seats-prices-table td, tr {
+	text-align: center;
+}
+
+table.seats-prices-table  tr:nth-child(even) {
+    background-color: Lightgreen;
+}
+
+table.seats-prices-table td:first-child {
+	text-align: left;
+}
+
+.now-showing .movie-poster {
+	max-height: 240px;
+	max-width: 159.50px;
+}
+
+.now-showing td {
+	padding-left: 5px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.now-showing tr {
+	text-align: left;
+}
+
+.now-showing .movie-title {
+	padding-bottom: 10px;
+	font-size: 20px;
+	font-weight: bolder;/
+}
+
+.about-us {
+	text-align: center;
+	padding-top: 10vh;
+}
+
+.booking-movie-title {
+	font-size: 45px;
+}
+.booking-table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.booking-table td {
+	padding: 10 10 0 0;
+}
+
+/* booking button junk */
+/* lifted from: https://codepen.io/andreasnylin/pen/mybrNr */
+.radio-btn {
+	position: relative;
+}
+
+.radio-btn input {
+	position: absolute;
+	opacity: 0;
+}
+
+.radio-btn label {
+	display: inline-block;
+	background: #ddd;
+	border-radius: 1em;
+	border-bottom: solid 4px #bbb;
+	padding: 10px;
+	margin-top: 0;
+	vertical-align: bottom;
+	cursor: pointer;
+}
+
+.radio-btn :checked + label {
+	border-bottom: solid 1px #bbb;
+}
