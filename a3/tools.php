@@ -67,12 +67,12 @@
 		$file = 'booking.csv'; // File used to store bookings
 		
 		// Calculate Totals and Taxes
-		$receiptArray["STA"] = Array( "Seats" => $bookingData[8], "Price" => $bookingData[9], "SubTotal" => ($bookingData[9] * $bookingData[8]));
-		$receiptArray["STP"] = Array( "Seats" => $bookingData[10], "Price" => $bookingData[11], "SubTotal" => ($bookingData[11] * $bookingData[10]));
-		$receiptArray["STC"] = Array( "Seats" => $bookingData[12], "Price" => $bookingData[13], "SubTotal" => ($bookingData[13] * $bookingData[12]));
-		$receiptArray["FCA"] = Array( "Seats" => $bookingData[14], "Price" => $bookingData[15], "SubTotal" => ($bookingData[15] * $bookingData[14]));
-		$receiptArray["FCP"] = Array( "Seats" => $bookingData[16], "Price" => $bookingData[17], "SubTotal" => ($bookingData[17] * $bookingData[16]));
-		$receiptArray["FCC"] = Array( "Seats" => $bookingData[18], "Price" => $bookingData[19], "SubTotal" => ($bookingData[19] * $bookingData[18]));
+		$receiptArray["STA"] = Array( "Seats" => $bookingData[7], "Price" => $bookingData[8], "SubTotal" => ($bookingData[8] * $bookingData[7]));
+		$receiptArray["STP"] = Array( "Seats" => $bookingData[9], "Price" => $bookingData[10], "SubTotal" => ($bookingData[10] * $bookingData[9]));
+		$receiptArray["STC"] = Array( "Seats" => $bookingData[11], "Price" => $bookingData[12], "SubTotal" => ($bookingData[12] * $bookingData[11]));
+		$receiptArray["FCA"] = Array( "Seats" => $bookingData[13], "Price" => $bookingData[14], "SubTotal" => ($bookingData[14] * $bookingData[13]));
+		$receiptArray["FCP"] = Array( "Seats" => $bookingData[15], "Price" => $bookingData[16], "SubTotal" => ($bookingData[16] * $bookingData[15]));
+		$receiptArray["FCC"] = Array( "Seats" => $bookingData[17], "Price" => $bookingData[18], "SubTotal" => ($bookingData[18] * $bookingData[17]));
 		
 		// Calc Total
 		$subTotal = 0;
@@ -83,11 +83,11 @@
 		
 		// Calc GST (Inclusive GST)
 		$taxRate = 10; // 10% GST
-		$receiptArray["GST"] = ($taxRate * $receiptArray["GST"]/100);
+		$receiptArray["GST"] = ($taxRate * $receiptArray["Total"]/100);
 		
 		// Update bookingData - We could assume the JS was not tampered with.. but lets not assume anything
-		$bookingData["Total"] = $receiptArray["Total"];
-		$bookingData["GST"] = $receiptArray["GST"];
+		$bookingData[19] = $receiptArray["Total"];
+		$bookingData[20] = $receiptArray["GST"];
 		
 		$csv = fopen($file, 'a+'); // Open the csv file, for write/appened/if non existant create file + read
 		
