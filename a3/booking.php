@@ -8,7 +8,7 @@
 	// Its good practice to set the timezone when using date functions, also prevents php warnings - Adam Mutimer
 	date_default_timezone_set("Australia/Melbourne");
 	
-	require_once('functions.php'); // Special Functions - Adam Mutimer
+	require_once('tools.php'); // Special Functions - Adam Mutimer
 ?>
 <!DOCTYPE html>
 <html lang='en'>
@@ -49,12 +49,12 @@
 					
 					if ($validCode = checkMovieCode($movieCode) == TRUE) {
 						$movie = getMovieByCode($movieCode);
-						echo "<h1 class=\"center booking-movie-title\">$movie[0]</h1>\n";
-						echo "\t\t\t\t\t" . "<h3>Rating: $movie[6]</h3>\n";
-						echo "\t\t\t\t\t" . '<iframe style="display:block;" width="560" height="315" src="' . $movie[8] . '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' . "\n";
-						echo "\t\t\t\t\t" . "<p>$movie[9]</p><br>\n";					
+						echo "<h1 class=\"center booking-movie-title\">" . $movie["Movie Title"] . "</h1>\n";
+						echo "\t\t\t\t\t" . "<h3>Rating: " . $movie["Rating"] . "</h3>\n";
+						echo "\t\t\t\t\t" . '<iframe style="display:block;" width="560" height="315" src="' . $movie["Trailer"] . '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' . "\n";
+						echo "\t\t\t\t\t" . "<p>" . $movie["Blip"] . "</p><br>\n";					
 						echo "\t\t\t\t\t" . "<h3>The Cast:</h3>\n";
-						echo "\t\t\t\t\t" . "<p>$movie[10]</p><br>\n";
+						echo "\t\t\t\t\t" . "<p>" . $movie["Actors"] . "</p><br>\n";
 						
 					} else {
 						echo "<h1 class=\"center\">ERROR: MOVIE CODE INVALID!</h1>";
@@ -187,46 +187,46 @@
 						<h3>Day &amp; Time</h3>
 						<?PHP
 							// Monday & Tuesday
-							if (!empty($movie[2])) {
+							if (!empty($movie["Mon - Tue"])) {
 								echo "<span class=\"radio-btn\">";
 								echo "\t<input type=\"radio\" id=\"MON\" name=\"day\" value=\"MON\" data-pricing=\"discprice\">";
-								echo "\t<label for=\"MON\">Monday: $movie[2]</label>";
+								echo "\t<label for=\"MON\">Monday: " . $movie["Mon - Tue"] . "</label>";
 								echo "</span>";
 								
 								echo "<span class=\"radio-btn\">";
 								echo "\t<input type=\"radio\" id=\"TUE\" name=\"day\" value=\"TUE\" data-pricing=\"discprice\">";
-								echo "\t<label for=\"TUE\">Tuesday: $movie[2]</label>";
+								echo "\t<label for=\"TUE\">Tuesday: " . $movie["Mon - Tue"] . "</label>";
 								echo "</span>";
 							}
 							
 							// Wednesday - Friday
-							if (!empty($movie[3])) {
+							if (!empty($movie["Wed - Fri"])) {
 								echo "<span class=\"radio-btn\">";
 								echo "\t<input type=\"radio\" id=\"WED\" name=\"day\" value=\"WED\" data-pricing=\"discprice\">";
-								echo "\t<label for=\"WED\">Wednesday: $movie[3]</label>";
+								echo "\t<label for=\"WED\">Wednesday: " . $movie["Wed - Fri"] . "</label>";
 								echo "</span>";
 								
 								echo "<span class=\"radio-btn\">";
 								echo "\t<input type=\"radio\" id=\"THU\" name=\"day\" value=\"THU\" data-pricing=\"discprice\">";
-								echo "\t<label for=\"THU\">Thursday: $movie[3]</label>";
+								echo "\t<label for=\"THU\">Thursday: " . $movie["Wed - Fri"] . "</label>";
 								echo "</span>";
 								
 								echo "<span class=\"radio-btn\">";
 								echo "\t<input type=\"radio\" id=\"FRI\" name=\"day\" value=\"FRI\" data-pricing=\"discprice\">";
-								echo "\t<label for=\"FRI\">Friday: $movie[3]</label>";
+								echo "\t<label for=\"FRI\">Friday: " . $movie["Wed - Fri"] . "</label>";
 								echo "</span>";
 							}
 
 							// Saturday & Sunday
-							if (!empty($movie[4])) {
+							if (!empty($movie["Sat - Sun"])) {
 								echo "<span class=\"radio-btn\">";
 								echo "\t<input type=\"radio\" id=\"SAT\" name=\"day\" value=\"SAT\" data-pricing=\"fullprice\">";
-								echo "\t<label for=\"SAT\">Saturday: $movie[4]</label>";
+								echo "\t<label for=\"SAT\">Saturday: " . $movie["Sat - Sun"] . "</label>";
 								echo "</span>";
 								
 								echo "<span class=\"radio-btn\">";
 								echo "\t<input type=\"radio\" id=\"SUN\" name=\"day\" value=\"SYN\" data-pricing=\"fullprice\">";
-								echo "\t<label for=\"SUN\">Sunday: $movie[4]</label>";
+								echo "\t<label for=\"SUN\">Sunday: " . $movie["Sat - Sun"] . "</label>";
 								echo "</span>";
 							}							
 							

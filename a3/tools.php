@@ -40,7 +40,7 @@
 		$array = loadCSVArray( "movies.csv" );
 		
 		foreach ($array as $row) {
-			$movieCodes[] = $row[1];
+			$movieCodes[] = $row["CODE"];
 		}
 		unset($array); // Unload from memory, garbage collector will do it when it's ready
 		return in_array($movieCode, $movieCodes, false);
@@ -51,7 +51,7 @@
 		$array = loadCSVArray( "movies.csv" );
 		
 		foreach ($array as $row) {
-			if ($row[1] == $movieCode) {
+			if ($row["CODE"] == $movieCode) {
 				$movie = $row;
 			}
 		}
@@ -59,6 +59,7 @@
 		return $movie;
 	}
 	
+	// Creates a booking in the booking spreadsheet, Returns BookingID
 	function createBooking($bookingData) {
 		$file = 'booking.csv';
 		
@@ -126,4 +127,11 @@
 		return $newID;
 	}
 	
+	function checkBooking() {
+	
+	}
+	
+	function retrieveBooking() {
+	
+	}
 ?>
