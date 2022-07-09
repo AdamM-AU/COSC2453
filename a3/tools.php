@@ -12,6 +12,9 @@
 	 *		checkBooking( ARRAY bookingData )	- Checks spreadsheet for bookings matching (BookingID OR Email OR Name OR Mobile)
 	 *		retrieveBooking ( INT bookingID ) 	- Returns array containing booking information
 	 *
+	 *		* Maths Related Sub-Functions - Called via primary functions *
+	 *		calcSubTotal( bookingData )
+	 *		calcGST( subTotal )
 	 */
 
 	// Open CSV and read into an array :)
@@ -61,7 +64,30 @@
 	
 	// Creates a booking in the booking spreadsheet, Returns BookingID
 	function createBooking($bookingData) {
-		$file = 'booking.csv';
+		$file = 'booking.csv'; // File used to store bookings
+		
+		// Calculate Totals and Taxes
+		$receiptArray["STA"] = Array( "Seats" => $bookingData[8], "Price" => $bookingData[9], "SubTotal" => ($bookingData[9] * $bookingData[8]));
+		$receiptArray["STP"] = Array( "Seats" => $bookingData[10], "Price" => $bookingData[11], "SubTotal" => ($bookingData[11] * $bookingData[10]));
+		$receiptArray["STC"] = Array( "Seats" => $bookingData[12], "Price" => $bookingData[13], "SubTotal" => ($bookingData[13] * $bookingData[12]));
+		$receiptArray["FCA"] = Array( "Seats" => $bookingData[14], "Price" => $bookingData[15], "SubTotal" => ($bookingData[15] * $bookingData[14]));
+		$receiptArray["FCP"] = Array( "Seats" => $bookingData[16], "Price" => $bookingData[17], "SubTotal" => ($bookingData[17] * $bookingData[16]));
+		$receiptArray["FCC"] = Array( "Seats" => $bookingData[18], "Price" => $bookingData[19], "SubTotal" => ($bookingData[19] * $bookingData[18]));
+		
+		// Calc Total
+		$subTotal = 0;
+		foreach ($receiptArray as $item) {
+			$subTotal = $subTotal + $item["SubTotal"];
+		}
+		$receiptArray["Total"] = $subTotal;
+		
+		// Calc GST (Inclusive GST)
+		$taxRate = 10; // 10% GST
+		$receiptArray["GST"] = ($taxRate * $receiptArray["GST"]/100);
+		
+		// Update bookingData - We could assume the JS was not tampered with.. but lets not assume anything
+		$bookingData["Total"] = $receiptArray["Total"];
+		$bookingData["GST"] = $receiptArray["GST"];
 		
 		$csv = fopen($file, 'a+'); // Open the csv file, for write/appened/if non existant create file + read
 		
