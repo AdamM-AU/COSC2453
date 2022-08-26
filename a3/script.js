@@ -25,6 +25,9 @@ window.onscroll = function () {
 }
 
 function validateForm() {
+  // Dirty but simple JS form Validation :)
+  // By Adam Mutimer
+
   var errorCount = 0;
 
   // Validate Name Field - Western Alphabet plus punctuation
