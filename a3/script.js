@@ -139,9 +139,17 @@ function runningPriceCalculator() {
     if (runningTotal > 0.00) {
       document.getElementById('runningTotal').innerHTML = "Total: ";
       document.getElementById('runningPriceCalculator').innerHTML = "$" + runningTotal.toFixed(2); // We only ever want two decimal places
+
+      // Enable the submit button
+      button = document.querySelector("#submit");
+      button.disabled = false;
     }
   } else {
     document.getElementById('runningTotal').innerHTML = "";
     document.getElementById('runningPriceCalculator').innerHTML = ""; // We only ever want two decimal places
+
+    // Disable the submit button
+    button = document.querySelector("#submit");
+    button.disabled = true;
   }
 }

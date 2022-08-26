@@ -262,7 +262,7 @@
 
 						<br>
 						<br>
-						<button class="btn btn-primary" type="submit">Create Booking</button
+						<button id="submit" class="btn btn-primary" type="submit">Create Booking</button
 					</form>
 				<?PHP
 				}
