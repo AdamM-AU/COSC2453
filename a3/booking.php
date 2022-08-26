@@ -13,7 +13,12 @@
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$valid = validateBooking();
-		//if (!$valid) { header("Location: index.php"); }
+		if (!$valid) {
+			// Naughty People are visiting!
+			header("Location: index.php");
+		} else {
+			// Process POST DATA!
+		}
 	}
 ?>
 <!DOCTYPE html>

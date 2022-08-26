@@ -4,7 +4,7 @@
 function validateBooking() {
   $errors = []; // new empty array to return error messages
 
-   if (empty($_POST['movie']) || checkMovieCode(sanitize($_POST['movie']))) {
+   if (empty($_POST['movie']) || !checkMovieCode(sanitize($_POST['movie']))) {
      $errors['movie'] = "Invalid or Missing Movie Code!";
      return false; // STOP HERE DONT EVEN BOTHER WITH ANYMORE CHECKS, THEY ARE CLEARLY DISHONEST!
    }
@@ -44,10 +44,9 @@ function validateBooking() {
       $badSeatCount++;
     }
 
-    if ($seatCount > 0 && $seatCount < 11) {
+    if ($seatCount < 1 && $seatCount > 10) {
       $badSeatNumCount++;
     }
-
    }
 
    if ($badSeatCount > 0) {
@@ -59,18 +58,19 @@ function validateBooking() {
    }
    // Check User Details
    $userName = sanitize($_POST['user']['name']);
-   $userNameRegex = "/^[a-z ,.'-]+$/i"; // Western Alphabet plus punctuation
+
+   $userNameRegex = '/^[a-z ,.\'-]+$/i'; // Western Alphabet plus punctuation
 
    $userEmail = sanitize($_POST['user']['email']);
-   $userEmailRegex = "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$";
+   $userEmailRegex = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
 
    $userMobile = sanitize($_POST['user']['mobile']);
-   $userMobileRegex = "/^04(\s?[0-9]{2}\s?)([0-9]{3}\s?[0-9]{3}|[0-9]{2}\s?[0-9]{2}\s?[0-9]{2})$/"; // Starts with 04 must contain 10 digits and optional spaces
+   $userMobileRegex = '/^04(\s?[0-9]{2}\s?)([0-9]{3}\s?[0-9]{3}|[0-9]{2}\s?[0-9]{2}\s?[0-9]{2})$/'; // Starts with 04 must contain 10 digits and optional spaces
 
    // NAME
    if (empty($userName)) {
      $errors['user']['name'] = "Name can't be empty";
-   } else if (preg_match($userName, $userNameRegex) == false) {
+   } else if (preg_match($userNameRegex, $userName) == false) {
      $errors['user']['name'] = "Name is invalid!";
    } else {
    }
@@ -78,7 +78,7 @@ function validateBooking() {
    // EMAIL
    if (empty($userEmail)) {
      $errors['user']['email'] = "Email can't be empty";
-   } else if (preg_match($userEmail, $userEmailRegex) == false) {
+   } else if (preg_match($userEmailRegex, $userEmail) == false) {
      $errors['user']['email'] = "Email is invalid!";
    } else {
    }
@@ -86,13 +86,14 @@ function validateBooking() {
    // MOBILE
    if (empty($userMobile)) {
      $errors['user']['mobile'] = "Mobile can't be empty";
-   } else if (preg_match($userMobile, $userMobileRegex) == false) {
+   } else if (preg_match($userMobileRegex, $userMobile) == false) {
      $errors['user']['mobile'] = "Mobile is invalid!";
    } else {
    }
+   $_SESSION['errors'] = $errors;
 
    // if we have errors return false, is no errors return true....
-   if ($errors.length > 0) {
+   if (sizeof($errors,0) > 0) {
      return false;
    } else {
      return true;
