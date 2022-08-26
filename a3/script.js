@@ -67,9 +67,15 @@ function validateForm() {
 }
 
 function runningPriceCalculator() {
-// Live Total Price Calaculator
-// By Adam Mutimer <--- I do this so people can "borrow parts of my work" and know they have to say where they got it from unless they are very naughty...
+  // Live Total Price Calaculator
+  // By Adam Mutimer <--- I do this so people can "borrow parts of my work" and know they have to say where they got it from unless they are very naughty...
+  var runningTotal = 0.00;
 
 // Magical Code goes here but first im going to have a smoke
+
+if (runningTotal > 0.00) {
+  document.getElementById('runningTotal').innerHTML = "Total: ";
+  document.getElementById('runningPriceCalculator').innerHTML = "$" + runningTotal.toFixed(2); // We only ever want two decimal places
+}
 
 }

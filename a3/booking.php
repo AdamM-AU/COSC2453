@@ -243,7 +243,7 @@
 						?>
 						<br>
 						<br>
-						<span class="runningTotal" id="runningTotal">Total: <span class="runningTotal" id="runningPriceCalculator">$0.00</span></span>
+						<span class="runningTotal" id="runningTotal"></span><span class="runningTotal" id="runningPriceCalculator"></span>
 						<br>
 						<br>
 						<hr>
