@@ -62,6 +62,7 @@
 
 					} else {
 						echo "<h1 class=\"center\">ERROR: MOVIE CODE INVALID!</h1>";
+						header("Location: index.php");
 					}
 					?>
 				<?PHP
