@@ -111,7 +111,7 @@
 						<?PHP
 						// Populate Table with CSV data, Just because we can....
 							$baseIndent = "\t\t\t\t\t\t";
-							$data = loadCSVArray("movies.csv");
+							$data = loadCSVArray("movies.txt");
 
 							// Loop Array and write each array row as a grid item
 							foreach ($data as $row) {
