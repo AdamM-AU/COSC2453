@@ -65,3 +65,11 @@ function validateForm() {
     return true; // Allow form submission
   }
 }
+
+function runningPriceCalculator() {
+// Live Total Price Calaculator
+// By Adam Mutimer <--- I do this so people can "borrow parts of my work" and know they have to say where they got it from unless they are very naughty...
+
+// Magical Code goes here but first im going to have a smoke
+
+}
