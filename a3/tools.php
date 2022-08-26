@@ -63,8 +63,80 @@
 	}
 
 	// Creates a booking in the booking spreadsheet, Returns BookingID
-	function createBooking($bookingData) {
+	function createBooking($postData) {
 		$file = 'booking.txt'; // File used to store bookings
+
+		// Patch some postData
+		if (!isset($postData['seats']['STA'])) { $postData['seats']['STA'] = 0;	}
+		if (!isset($postData['seats']['STP'])) { $postData['seats']['STP'] = 0;	}
+		if (!isset($postData['seats']['STC'])) { $postData['seats']['STC'] = 0;	}
+		if (!isset($postData['seats']['FCA'])) { $postData['seats']['FCA'] = 0;	}
+		if (!isset($postData['seats']['FCP'])) { $postData['seats']['FCP'] = 0;	}
+		if (!isset($postData['seats']['FCC'])) { $postData['seats']['FCC'] = 0;	}
+
+
+		$bookingData = [ date('Y/m/d'),
+										 sanitize($postData['user']['name']), // Customer Name
+										 sanitize($postData['user']['email']), // Customer Email
+										 sanitize($postData['user']['mobile']), // Customer Movile
+										 sanitize($postData['movie']), // Movie Code
+										 sanitize($postData['day']), // Day of Movie Booking
+										 0, // Time of Movie Booking
+										 sanitize($postData['seats']['STA']) ?: 0, // # of Seats  $name = $name ?: 'joe'
+										 0, // $ of Seats
+										 sanitize($postData['seats']['STP']) ?: 0, // # of Seats
+										 0, // $ of Seats
+										 sanitize($postData['seats']['STC']) ?: 0, // # of Seats
+										 0, // $ of Seats
+										 sanitize($postData['seats']['FCA']) ?: 0, // # of Seats
+										 0, // $ of Seats
+										 sanitize($postData['seats']['FCP']) ?: 0, // # of Seats
+										 0, // $ of Seats
+										 sanitize($postData['seats']['FCC']) ?: 0, // # of Seats
+										 0, // $ of Seats
+									 ];
+
+		// Work out movie time
+		$movieData = getMovieByCode(sanitize($_POST['movie']));
+		if ($bookingData[5] == "MON" || $bookingData[5] == "TUE") {
+			$bookingData[6] = $movieData['Mon - Tue'];
+		} else if ($bookingData[5] == "WED" || $bookingData[5] == "THU" || $bookingData[5] == "FRI") {
+			$bookingData[6] = $movieData['Wed - Fri'];
+		} else if ($bookingData[5] == "SAT" || $bookingData[5] == "SUN") {
+			$bookingData[6] = $movieData['Sat - Sun'];
+		} else {
+			$bookingData[6] = "ERROR!!!";
+		}
+
+
+		// Working out ticket costs
+		$ticketPricing = array('STA' => array('discPrice' => 15.00, 'fullPrice' => 20.50),
+													 'STP' => array('discPrice' => 13.50, 'fullPrice' => 18.00),
+													 'STC' => array('discPrice' => 12.00, 'fullPrice' => 16.50),
+													 'FCA' => array('discPrice' => 24.00, 'fullPrice' => 30.00),
+													 'FCP' => array('discPrice' => 22.50, 'fullPrice' => 27.00),
+													 'FCC' => array('discPrice' => 21.00, 'fullPrice' => 24.00),
+												 );
+
+		$arrayKeys = array_keys($ticketPricing); // Array keys :)
+		$ticketPrices = [];
+		if ($bookingData[5] == "MON" || $bookingData[5] == "TUE" || $bookingData[5] == "WED" || $bookingData[5] == "THU" || $bookingData[5] == "FRI") {
+			foreach($arrayKeys as $key) {
+				array_push($ticketPrices, $ticketPricing[$key]['discPrice']);
+			}
+		} else {
+			foreach($arrayKeys as $key) {
+				array_push($ticketPrices, $ticketPricing[$key]['fullPrice']);
+			}
+		}
+		// Populate Prices
+		$bookingData[8]  = $ticketPrices[0]; // STA Price
+		$bookingData[10] = $ticketPrices[1]; // STP Price
+		$bookingData[12] = $ticketPrices[2]; // STC Price
+		$bookingData[14] = $ticketPrices[3]; // FCA Price
+		$bookingData[16] = $ticketPrices[4]; // FCP Price
+		$bookingData[18] = $ticketPrices[5]; // FCC Price
+
 
 		// Calculate Totals and Taxes
 		$receiptArray["STA"] = Array( "Seats" => $bookingData[7], "Price" => $bookingData[8], "SubTotal" => ($bookingData[8] * $bookingData[7]));

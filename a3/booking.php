@@ -17,9 +17,10 @@
 			// Naughty People are visiting!
 			header("Location: index.php");
 		} else {
-			// Process POST DATA!
+			createBooking($_POST);
 		}
 	}
+
 ?>
 <!DOCTYPE html>
 <html lang='en'>
