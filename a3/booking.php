@@ -97,7 +97,7 @@
 							<td>
 								<select id="STP" name="seats[STP]" data-full="18.00" data-disc="13.50" onchange='runningPriceCalculator()'>
 									<option disabled selected>Select Required Tickets</option>
-									<option value="0">1</option>
+									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>

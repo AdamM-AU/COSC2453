@@ -140,5 +140,8 @@ function runningPriceCalculator() {
       document.getElementById('runningTotal').innerHTML = "Total: ";
       document.getElementById('runningPriceCalculator').innerHTML = "$" + runningTotal.toFixed(2); // We only ever want two decimal places
     }
+  } else {
+    document.getElementById('runningTotal').innerHTML = "";
+    document.getElementById('runningPriceCalculator').innerHTML = ""; // We only ever want two decimal places
   }
 }
