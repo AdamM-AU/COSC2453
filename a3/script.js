@@ -125,6 +125,16 @@ function runningPriceCalculator() {
   // Now the calculations begin... maybe.. if we have two arrays with data
   if (reqSeatingArr.length > 0 && dayTimeArr.length > 0) {
 
+    // Loop though the days slected then loop though tickets
+    for (let i = 0; i < dayTimeArr.length; i++) {
+      for (let x = 0; x < reqSeatingArr.length; x++) {
+        if (dayTimeArr[i].priceType == "discprice") {
+          runningTotal = runningTotal + (reqSeatingArr[x].data.discPrice * reqSeatingArr[x].data.seatCount);
+        } else {
+          runningTotal = runningTotal + (reqSeatingArr[x].data.fullPrice * reqSeatingArr[x].data.seatCount);
+        }
+      }
+    }
     // puke out the result
     if (runningTotal > 0.00) {
       document.getElementById('runningTotal').innerHTML = "Total: ";
