@@ -102,6 +102,9 @@ footer {
 	bottom: 0;
 }
 
+.validation-error {
+	color: red !important;
+}
 /* END - Header */
 
 /* Small View - Mobiles */

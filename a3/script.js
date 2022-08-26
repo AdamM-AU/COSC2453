@@ -25,16 +25,38 @@ window.onscroll = function () {
 }
 
 function validateForm() {
+  var errorCount = 0;
+
   // Validate Name Field - Western Alphabet plus punctuation
   var nameRegex = /^[a-z ,.'-]+$/i;
-  var nameField = document.getElementByID('name').value();
+  var nameField = document.getElementById('name').value;
   var nameResult = nameRegex.test(nameField);
-  // Do something based on boolean result
+
+  if (nameResult == false) {
+    document.getElementById('name-error').innerHTML = "<br />Invalid Name!";
+    errorCount++;
+  } else {
+    document.getElementById('name-error').innerHTML = "";
+  }
 
   // Validate Mobile Field - Starts with 04 must contain 10 digits and optional spaces
   var mobileRegex = /^04(\s?[0-9]{2}\s?)([0-9]{3}\s?[0-9]{3}|[0-9]{2}\s?[0-9]{2}\s?[0-9]{2})$/;
-  var mobileField = document.getElementByID('mobile').value();
+  var mobileField = document.getElementById('mobile').value;
   var mobileResult = mobileRegex.test(mobileField);
-  // Do Something with result
+
+  if (mobileResult == false) {
+    document.getElementById('mobile-error').innerHTML = "<br />Invalid Mobile!";
+    errorCount++;
+  } else {
+    document.getElementById('mobile-error').innerHTML = "";
+  }
+
+  if (errorCount > 0) {
+    console.log(errorCount);
+    return false; // Stop form submission
+  } else {
+    console.log(errorCount)
+    return true; // Allow form submission
+  }
 
 }
