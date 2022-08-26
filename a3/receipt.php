@@ -4,7 +4,7 @@ require_once('tools.php'); // Special Functions - Adam Mutimer
 
 if (!isset($_SESSION['myLastBookingID'])) {
   header("Location: index.php");
-} else if ($_GET["error"]) {
+} else if (isset($_GET["error"])) {
   if (!isset($_SESSION['myLastBookingERROR'])) {
     header("Location: index.php");
   } else {
