@@ -15,7 +15,6 @@ window.onscroll = function () {
         var arBot = sections[a].offsetTop + sections[a].offsetHeight - parseInt(navbar[0].offsetHeight * 2);
 
         if (window.scrollY >= arTop && window.scrollY < arBot) {
-            console.log(2);
             navlinks[a].parentElement.classList.add('active');
 
         } else {
@@ -70,12 +69,66 @@ function runningPriceCalculator() {
   // Live Total Price Calaculator
   // By Adam Mutimer <--- I do this so people can "borrow parts of my work" and know they have to say where they got it from unless they are very naughty...
   var runningTotal = 0.00;
+  var counter = 0;
 
-// Magical Code goes here but first im going to have a smoke
+  //
+  // -------------------------------------------
+  // SEATING: Fetch form custom data attributes
+  //
+  var reqSeating = document.getElementsByTagName('select');
+  var reqSeatingArr = [];
 
-if (runningTotal > 0.00) {
-  document.getElementById('runningTotal').innerHTML = "Total: ";
-  document.getElementById('runningPriceCalculator').innerHTML = "$" + runningTotal.toFixed(2); // We only ever want two decimal places
-}
+  while (counter < reqSeating.length) {
+    // Fetch attributes - convert some to integers, other to float
+    var seatType = reqSeating[counter].getAttribute('id');
+    var fullPrice = parseFloat(reqSeating[counter].getAttribute('data-full'));
+    var discPrice = parseFloat(reqSeating[counter].getAttribute('data-disc'));
+    var seatCount = parseInt(reqSeating[counter].value);
 
+    // Check seatCount to make sure its an int if not make it 0
+    if (!Number.isInteger(seatCount)) {
+      seatCount = 0;
+    }
+
+    // Only add to array if we need too...
+    if (seatCount > 0) {
+      var item = { seatType: seatType, data: { seatCount: seatCount, fullPrice: fullPrice, discPrice: discPrice} };
+      reqSeatingArr.push(item);
+    }
+    counter++;
+  }
+  counter = 0; // Reset Counter
+  console.log(reqSeatingArr);
+
+  //
+  // -------------------------------------------
+  // DAY-TIME: Fetch form custom data attributes
+  //
+  var dayTime = document.querySelectorAll('input[name="day"]');
+  var dayTimeArr = [];
+
+  while (counter < dayTime.length) {
+    var selected = dayTime[counter].checked;
+    var day = dayTime[counter].value;
+    var priceType = dayTime[counter].getAttribute('data-pricing');
+
+    // Only add to array if item is checked
+    if (selected) {
+      item = { day: day, priceType: priceType };
+      dayTimeArr.push(item);
+    }
+    counter++;
+  }
+  counter = 0;
+  console.log(dayTimeArr);
+
+  // Now the calculations begin... maybe.. if we have two arrays with data
+  if (reqSeatingArr.length > 0 && dayTimeArr.length > 0) {
+
+    // puke out the result
+    if (runningTotal > 0.00) {
+      document.getElementById('runningTotal').innerHTML = "Total: ";
+      document.getElementById('runningPriceCalculator').innerHTML = "$" + runningTotal.toFixed(2); // We only ever want two decimal places
+    }
+  }
 }

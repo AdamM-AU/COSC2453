@@ -70,12 +70,12 @@
 				?>
 					<h2>Booking Information</h2>
 					<table class="booking-table">
-					<form name="booking" method="post" action="" onsubmit="return validateForm()">
+					<form id="booking" name="booking" method="post" action="" onsubmit="return validateForm()">
 						<input type="hidden" name="movie" value="<?PHP echo $movieCode; ?>" readonly>
 						<tr>
 							<td><label class = 'booking-label' for='STA'>Standard Adult</label></td>
 							<td>
-								<select id="STA" name="seats[STA]" data-full="20.50" data-disc="15.00"  onchange='runningPriceCalculator()'>
+								<select id="STA" name="seats[STA]" data-full="20.50" data-disc="15.00" onchange='runningPriceCalculator()'>
 									<option disabled selected>Select Required Tickets</option>
 									<option value="0">0</option>
 									<option value="1">1</option>
@@ -235,7 +235,7 @@
 								echo "</span>";
 
 								echo "<span class=\"radio-btn\">";
-								echo "\t<input type=\"radio\" id=\"SUN\" name=\"day\" value=\"SYN\" data-pricing=\"fullprice\" onchange='runningPriceCalculator()'>";
+								echo "\t<input type=\"radio\" id=\"SUN\" name=\"day\" value=\"SUN\" data-pricing=\"fullprice\" onchange='runningPriceCalculator()'>";
 								echo "\t<label for=\"SUN\">Sunday: " . $movie["Sat - Sun"] . "</label>";
 								echo "</span>";
 							}
