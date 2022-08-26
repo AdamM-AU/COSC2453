@@ -23,3 +23,18 @@ window.onscroll = function () {
         }
     }
 }
+
+function validateForm() {
+  // Validate Name Field - Western Alphabet plus punctuation
+  var nameRegex = /^[a-z ,.'-]+$/i;
+  var nameField = document.getElementByID('name').value();
+  var nameResult = nameRegex.test(nameField);
+  // Do something based on boolean result
+
+  // Validate Mobile Field - Starts with 04 must contain 10 digits and optional spaces
+  var mobileRegex = /^04(\s?[0-9]{2}\s?)([0-9]{3}\s?[0-9]{3}|[0-9]{2}\s?[0-9]{2}\s?[0-9]{2})$/;
+  var mobileField = document.getElementByID('mobile').value();
+  var mobileResult = mobileRegex.test(mobileField);
+  // Do Something with result
+
+}
