@@ -75,8 +75,9 @@
 						<tr>
 							<td><label class = 'booking-label' for='STA'>Standard Adult</label></td>
 							<td>
-								<select id="STA" name="seats[STA]" data-full="20.50" data-disc="15.00">
+								<select id="STA" name="seats[STA]" data-full="20.50" data-disc="15.00"  onchange='runningPriceCalculator()'>
 									<option disabled selected>Select Required Tickets</option>
+									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -94,8 +95,9 @@
 						<tr>
 							<td><label class="booking-label" for="STP">Standard Concession</label></td>
 							<td>
-								<select id="STP" name="seats[STP]" data-full="18.00" data-disc="13.50">
+								<select id="STP" name="seats[STP]" data-full="18.00" data-disc="13.50" onchange='runningPriceCalculator()'>
 									<option disabled selected>Select Required Tickets</option>
+									<option value="0">1</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -113,8 +115,9 @@
 						<tr>
 							<td><label class="booking-label" for="STC">Standard Child</label></td>
 							<td>
-								<select id="STC" name="seats[STC]" data-full="16.50" data-disc="12.00">
+								<select id="STC" name="seats[STC]" data-full="16.50" data-disc="12.00" onchange='runningPriceCalculator()'>
 									<option disabled selected>Select Required Tickets</option>
+									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -132,8 +135,9 @@
 						<tr>
 							<td><label class="booking-label" for="FCA">First Class Adult</label></td>
 							<td>
-								<select id="FCA" name="seats[FCA]" data-full="30.00" data-disc="24.00">
+								<select id="FCA" name="seats[FCA]" data-full="30.00" data-disc="24.00" onchange='runningPriceCalculator()'>
 									<option disabled selected>Select Required Tickets</option>
+									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -151,8 +155,9 @@
 						<tr>
 							<td><label class="booking-label" for="FCP">First Class Concession</label></td>
 							<td>
-								<select id="FCP" name="seats[FCP]" data-full="27.00" data-disc="22.50">
+								<select id="FCP" name="seats[FCP]" data-full="27.00" data-disc="22.50" onchange='runningPriceCalculator()'>
 									<option disabled selected>Select Required Tickets</option>
+									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -170,8 +175,9 @@
 						<tr>
 							<td><label class="booking-label" for="FCC">First Class Child</label></td>
 							<td>
-								<select id="FCC" name="seats[FCC]" data-full="24.00" data-disc="21.00">
+								<select id="FCC" name="seats[FCC]" data-full="24.00" data-disc="21.00" onchange='runningPriceCalculator()'>
 									<option disabled selected>Select Required Tickets</option>
+									<option value="0">0</option>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -193,12 +199,12 @@
 							// Monday & Tuesday
 							if (!empty($movie["Mon - Tue"])) {
 								echo "<span class=\"radio-btn\">";
-								echo "\t<input type=\"radio\" id=\"MON\" name=\"day\" value=\"MON\" data-pricing=\"discprice\">";
+								echo "\t<input type=\"radio\" id=\"MON\" name=\"day\" value=\"MON\" data-pricing=\"discprice\" onchange='runningPriceCalculator()'>";
 								echo "\t<label for=\"MON\">Monday: " . $movie["Mon - Tue"] . "</label>";
 								echo "</span>";
 
 								echo "<span class=\"radio-btn\">";
-								echo "\t<input type=\"radio\" id=\"TUE\" name=\"day\" value=\"TUE\" data-pricing=\"discprice\">";
+								echo "\t<input type=\"radio\" id=\"TUE\" name=\"day\" value=\"TUE\" data-pricing=\"discprice\" onchange='runningPriceCalculator()'>";
 								echo "\t<label for=\"TUE\">Tuesday: " . $movie["Mon - Tue"] . "</label>";
 								echo "</span>";
 							}
@@ -206,17 +212,17 @@
 							// Wednesday - Friday
 							if (!empty($movie["Wed - Fri"])) {
 								echo "<span class=\"radio-btn\">";
-								echo "\t<input type=\"radio\" id=\"WED\" name=\"day\" value=\"WED\" data-pricing=\"discprice\">";
+								echo "\t<input type=\"radio\" id=\"WED\" name=\"day\" value=\"WED\" data-pricing=\"discprice\" onchange='runningPriceCalculator()'>";
 								echo "\t<label for=\"WED\">Wednesday: " . $movie["Wed - Fri"] . "</label>";
 								echo "</span>";
 
 								echo "<span class=\"radio-btn\">";
-								echo "\t<input type=\"radio\" id=\"THU\" name=\"day\" value=\"THU\" data-pricing=\"discprice\">";
+								echo "\t<input type=\"radio\" id=\"THU\" name=\"day\" value=\"THU\" data-pricing=\"discprice\" onchange='runningPriceCalculator()'>";
 								echo "\t<label for=\"THU\">Thursday: " . $movie["Wed - Fri"] . "</label>";
 								echo "</span>";
 
 								echo "<span class=\"radio-btn\">";
-								echo "\t<input type=\"radio\" id=\"FRI\" name=\"day\" value=\"FRI\" data-pricing=\"discprice\">";
+								echo "\t<input type=\"radio\" id=\"FRI\" name=\"day\" value=\"FRI\" data-pricing=\"discprice\" onchange='runningPriceCalculator()'>";
 								echo "\t<label for=\"FRI\">Friday: " . $movie["Wed - Fri"] . "</label>";
 								echo "</span>";
 							}
@@ -224,17 +230,20 @@
 							// Saturday & Sunday
 							if (!empty($movie["Sat - Sun"])) {
 								echo "<span class=\"radio-btn\">";
-								echo "\t<input type=\"radio\" id=\"SAT\" name=\"day\" value=\"SAT\" data-pricing=\"fullprice\">";
+								echo "\t<input type=\"radio\" id=\"SAT\" name=\"day\" value=\"SAT\" data-pricing=\"fullprice\" onchange='runningPriceCalculator()'>";
 								echo "\t<label for=\"SAT\">Saturday: " . $movie["Sat - Sun"] . "</label>";
 								echo "</span>";
 
 								echo "<span class=\"radio-btn\">";
-								echo "\t<input type=\"radio\" id=\"SUN\" name=\"day\" value=\"SYN\" data-pricing=\"fullprice\">";
+								echo "\t<input type=\"radio\" id=\"SUN\" name=\"day\" value=\"SYN\" data-pricing=\"fullprice\" onchange='runningPriceCalculator()'>";
 								echo "\t<label for=\"SUN\">Sunday: " . $movie["Sat - Sun"] . "</label>";
 								echo "</span>";
 							}
 
 						?>
+						<br>
+						<br>
+						<span class="runningTotal" id="runningTotal">Total: <span class="runningTotal" id="runningPriceCalculator">$0.00</span></span>
 						<br>
 						<br>
 						<hr>

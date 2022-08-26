@@ -105,6 +105,11 @@ footer {
 .validation-error {
 	color: red !important;
 }
+
+.runningTotal {
+	font-weight: bold !important;
+	font-size: 20px;
+}
 /* END - Header */
 
 /* Small View - Mobiles */
