@@ -218,19 +218,28 @@
 		} else {
 			fclose($csv); // Close file
 			// Couldnt lock file, return false so we can throw an error
+			$_SESSION["myLastBookingERROR"] = "Error: Could not write to CSV file!";
 			return false;
 		}
 
 		$_SESSION["myLastBookingID"] = $newID; // Set a session variable with the the users last bookingID
-		return $newID;
+		return true;
 	}
 
 	function checkBooking() {
 
 	}
 
-	function retrieveBooking() {
+	function retrieveBooking($bookingID) {
+		$array = loadCSVArray( "booking.txt" );
 
+		foreach ($array as $row) {
+			if ($row['BookingID'] == $bookingID) {
+				$booking = $row;
+			}
+		}
+		unset($array); // Unload from memory, garbage collector will do it when it's ready
+		return $booking;
 	}
 
 	function sanitize($string) {

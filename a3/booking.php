@@ -17,7 +17,12 @@
 			// Naughty People are visiting!
 			header("Location: index.php");
 		} else {
-			createBooking($_POST);
+			$booking = createBooking($_POST);
+			if ($booking) {
+				header("Location: receipt.php");
+			} else {
+				header("Location: receipt.php?error=1");
+			}
 		}
 	}
 
