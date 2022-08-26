@@ -1,22 +1,28 @@
 <?php
 
-/* Call this function in the booking page like so:
-   $fieldErrors = validateBooking();
-   If the array is empty, then no errors were generated
-*/
+// Didnt like the supplied function at all, made my own
 function validateBooking() {
-  $errors = []; // new empty array to return error messages
-  if ($_POST['user']['name'] == '') {
-    $errors['user']['name'] = "Name can't be blank";
-  } else {
-    // more advanced checks here
-  }
+  require('tools.php'); // We need to borrow some things
 
-  if ($_POST['user']['email'] == '') {
-    $errors['user']['email'] = "Email can't be blank";
-  } else {
-    // more advanced checks here
-  }
-  // ... etc
+  $errors = []; // new empty array to return error messages
+
+   // Check Movie code...ZZZzzzzzzz
+   if (empty($_POST(['movie'])) || checkMovieCode($_POST(['movie']))) {
+     $errors['movie'] = "Invalid or Missing Movie Code!";
+   }
+
+   // Check booking details
+   // day is valid, seat type and the price is valid
+   // if day and seat type is valid...are they valid for the movie?
+
+   // Check User Details 
+   // name, email, mobile - using regex's :)
+
+   // if we have errors return false, is no errors return true....
+   if (errors.length > 0) {
+     return false;
+   } else {
+     return true;
+   }
 }
 ?>
