@@ -28,18 +28,18 @@ function validateForm() {
   // Dirty but simple JS form Validation :)
   // By Adam Mutimer
 
-  var errorCount = 0;
+  var errorCount = 0; // error counter, so we can return to the form after we have validated all the fields per run
 
   // Validate Name Field - Western Alphabet plus punctuation
-  var nameRegex = /^[a-z ,.'-]+$/i;
-  var nameField = document.getElementById('name').value;
-  var nameResult = nameRegex.test(nameField);
+  var nameRegex = /^[a-z ,.'-]+$/i; // Regex :)
+  var nameField = document.getElementById('name').value; // Grab Form Field
+  var nameResult = nameRegex.test(nameField); // test form field against regex
 
   if (nameResult == false) {
-    document.getElementById('name-error').innerHTML = "<br />Invalid Name!";
+    document.getElementById('name-error').innerHTML = "<br />Invalid Name!"; // This is an error field in the form empty by default
     errorCount++;
   } else {
-    document.getElementById('name-error').innerHTML = "";
+    document.getElementById('name-error').innerHTML = ""; // Empty the error field if we have run a validation and failed before
   }
 
   // Validate Mobile Field - Starts with 04 must contain 10 digits and optional spaces
@@ -54,6 +54,9 @@ function validateForm() {
     document.getElementById('mobile-error').innerHTML = "";
   }
 
+  // As i said we checked all the fields, and updated the counter as required
+  // now we can return a single true or false back to the form, now all Validation
+  // tasks are completed.
   if (errorCount > 0) {
     console.log(errorCount);
     return false; // Stop form submission
@@ -61,5 +64,4 @@ function validateForm() {
     console.log(errorCount)
     return true; // Allow form submission
   }
-
 }
