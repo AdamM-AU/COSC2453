@@ -12,7 +12,8 @@ if (!isset($_SESSION['myLastBookingID'])) {
   }
 } else {
 
-$booking = retrieveBooking($_SESSION['myLastBookingID']);
+$booking = retrieveBooking($_SESSION['myLastBookingID']); // Booking is pulled back from the CSV file :D oh my god hahaha
+
 echo "\n\n";
 echo "Lunardo Cinema's\n";
 echo "123 Smith Street,\nJohndoe, Victoria\n";
