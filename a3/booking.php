@@ -9,6 +9,12 @@
 	date_default_timezone_set("Australia/Melbourne");
 
 	require_once('tools.php'); // Special Functions - Adam Mutimer
+	require_once('post-validation.php'); // Special Functions - Adam Mutimer
+
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		$valid = validateBooking();
+		//if (!$valid) { header("Location: index.php"); }
+	}
 ?>
 <!DOCTYPE html>
 <html lang='en'>

@@ -160,4 +160,8 @@
 	function retrieveBooking() {
 
 	}
+
+	function sanitize($string) {
+		return htmlspecialchars($string);
+	}
 ?>
