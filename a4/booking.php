@@ -41,7 +41,11 @@
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<script src="script.js"></script>
-
+		<script>
+			$(document).ready(function(){
+				rememberedMe();
+			});
+		</script>
 	</head>
 
 	<body>
@@ -279,8 +283,11 @@
 						<span id="mobile-error" class="validation-error"></span><br>
 
 						<br>
+						<input type="checkbox" value="plsRememberMe" id="rememberMe"><label for="rememberMe">Remember Me</label>
 						<br>
-						<button id="submit" class="btn btn-primary" type="submit">Create Booking</button
+						
+						<br>
+						<button id="submit" class="btn btn-primary" type="submit">Create Booking</button>
 					</form>
 				<?PHP
 				}

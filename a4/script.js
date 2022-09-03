@@ -23,6 +23,43 @@ window.onscroll = function () {
     }
 }
 
+function rememberedMe() {
+	// Repopulate form with localStorage
+	var localCheck = localStorage.rememberMe;
+	
+	if (localCheck == "true") {
+		// Repopulate Form
+		document.getElementById('name').value = localStorage.fullName;
+		document.getElementById('mobile').value = localStorage.mobile;
+		document.getElementById('email').value = localStorage.email;
+		document.getElementById('rememberMe').setAttribute("checked", "checked");
+	} else {
+		// Do Nothing
+	}
+	
+}
+
+function rememberMe() {
+	// RemeberMe - Simple JS to store users form data in the browsers localstorage
+	var checkBox = document.querySelector('#rememberMe').checked;
+	
+	// Storage Updates
+	if (checkBox == false) {
+		localStorage.fullName = "";
+		localStorage.mobile = "";
+		localStorage.email = "";
+		localStorage.rememberMe = "";
+		console.log(localStorage);
+	} else {
+		localStorage.fullName = document.getElementById('name').value;
+		localStorage.mobile = document.getElementById('mobile').value;
+		localStorage.email = document.getElementById('email').value;
+		localStorage.rememberMe = true;
+		console.log(localStorage);
+	}
+	return;
+}
+
 function validateForm() {
   // Dirty but simple JS form Validation :)
   // By Adam Mutimer
@@ -60,7 +97,8 @@ function validateForm() {
     console.log(errorCount);
     return false; // Stop form submission
   } else {
-    console.log(errorCount)
+    console.log(errorCount);
+	rememberMe(); // Simple Code hook to run our remeberMe() functions
     return true; // Allow form submission
   }
 }

@@ -1,4 +1,21 @@
-<pre>
+<html lang='en'>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Lunardo Cinema's</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			// Testing Purposes
+			console.log('Full Name: ' + localStorage.fullName);
+			console.log('Mobile: ' + localStorage.mobile);
+			console.log('Email: ' + localStorage.email);
+		});
+	</script>
+</head>
+<body>
+	<pre>
 <?PHP
 require_once('tools.php'); // Special Functions - Adam Mutimer
 
@@ -59,4 +76,6 @@ echo "GST: $" . number_format((float)$booking['GST'], 2, '.', '') . "\n";
 echo "Total: $" . number_format((float)$booking['Total'], 2, '.', '') . "\n";
 }
 ?>
-</pre>
+	</pre>
+</body>
+</html>
