@@ -9,7 +9,7 @@
 	 *		checkMovieCode( STRING movieCode ) 	- Checks MovieCode against the movie csv, returns boolean true or false
 	 *		getMovieByCode( STRING MovieCode ) 	- Returns an array containing only the requested movie
 	 *		createBooking( ARRAY bookingData )	- Creates a booking in the booking spreadsheet, Returns BookingID
-	 *		checkBooking( ARRAY bookingData )	- Checks spreadsheet for bookings matching (BookingID OR Email OR Name OR Mobile)
+	 *		findBooking( ARRAY bookingData )	- Checks spreadsheet for bookings matching (Email AND Mobile)
 	 *		retrieveBooking ( INT bookingID ) 	- Returns array containing booking information
 	 *
 	 *		* Maths Related Sub-Functions - Called via primary functions *
@@ -74,6 +74,8 @@
 		if (!isset($postData['seats']['FCP'])) { $postData['seats']['FCP'] = 0;	}
 		if (!isset($postData['seats']['FCC'])) { $postData['seats']['FCC'] = 0;	}
 
+		// Stipe spaces from mobile
+		$postData['user']['mobile'] = str_replace(' ', '', $postData['user']['mobile']);
 
 		$bookingData = [ date('Y/m/d'),
 										 sanitize($postData['user']['name']), // Customer Name
@@ -226,8 +228,36 @@
 		return true;
 	}
 
-	function checkBooking() {
-
+	function findBooking($postData) {
+		// Find the lastest booking
+		
+		// Prep post data
+		// Stipe spaces from mobile
+		$mobile = str_replace(' ', '', $postData['mobile']);
+		$mobile = sanitize($mobile);
+		
+		$email = str_replace(' ', '', $postData['email']);
+		$email = sanitize($email);
+		
+		$array = loadCSVArray( "booking.txt" );
+		$tmpID = 0; // We Store the Highest BookingID here
+		
+		foreach ($array as $row) {
+			if ($row["Mobile"] == $mobile && $row["Email"] == $email) {
+				if ($row["BookingID"] > $tmpID) {
+					$tmpID = $row["BookingID"];
+				}
+			}
+		}
+		unset($array); // Unload from memory, garbage collector will do it when it's ready
+		if ($tmpID != 0) {
+			// We found a booking
+			$_SESSION["myLastBookingID"] = $tmpID;
+			return true;
+		} else {
+			// No Booking
+			return false;
+		}
 	}
 
 	function retrieveBooking($bookingID) {

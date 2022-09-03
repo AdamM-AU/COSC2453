@@ -12,12 +12,22 @@
 	require_once('post-validation.php'); // Special Functions - Adam Mutimer
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		$valid = validateBooking();
-		if (!$valid) {
-			// Naughty People are visiting!
-			header("Location: index.php");
+		if (!$_POST['retrieve']) {			
+			$valid = validateBooking();
+			if (!$valid) {
+				// Naughty People are visiting!
+				header("Location: index.php");
+			} else {
+				$booking = createBooking($_POST);
+				if ($booking) {
+					header("Location: receipt.php");
+				} else {
+					header("Location: receipt.php?error=1");
+				}
+			}
 		} else {
-			$booking = createBooking($_POST);
+			// Retrieve Booking
+			$booking = findBooking($_POST);
 			if ($booking) {
 				header("Location: receipt.php");
 			} else {
@@ -276,7 +286,7 @@
 						<span id="name-error" class="validation-error"></span><br>
 
 						<label class="booklabel" for="email">Email:</label><br>
-						<input type="email" id="email" name="user[email]email" placeholder="YOU@SOMEWHERE.COM" required><br>
+						<input type="email" id="email" name="user[email]" placeholder="YOU@SOMEWHERE.COM" required><br>
 
 						<label class="booklabel" for="mobile">Mobile Number:</label><br>
 						<input type="tel" id="mobile" name="user[mobile]"  placeholder="04XXXXXXXX" required>
@@ -306,6 +316,15 @@
 		</main>
 
 		<footer>
+			<form id="retrieve" name="retrieveBooking" method="post">
+				<input type="hidden" name="retrieve" value="true" readonly>
+				<label class="booklabel" for="mobile">Mobile Number:</label>
+				<input type="tel" id="mobile" name="mobile" placeholder="04XXXXXXXX" required>
+				<label class="booklabel" for="email">Email:</label>
+				<input type="email" id="email" name="email" placeholder="YOU@SOMEWHERE.COM" required> 
+				
+				<button id="submit" class="btn btn-primary" type="submit">Get Booking</button>
+			</form>
 			<div class="table-grid-footer">
 				<div class="grid-item">info@lunardo.com.au</div>
 				<div class="grid-item">(03) 1234 1234</div>
