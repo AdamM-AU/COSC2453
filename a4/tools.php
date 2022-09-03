@@ -256,6 +256,7 @@
 			return true;
 		} else {
 			// No Booking
+			$_SESSION['myLastBookingERROR'] = "Error: No Booking Found!";
 			return false;
 		}
 	}

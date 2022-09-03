@@ -26,6 +26,8 @@ if (!isset($_SESSION['myLastBookingID'])) {
     header("Location: index.php");
   } else {
     print_r($_SESSION['myLastBookingERROR']);
+	echo "<br><br>";
+	echo "<a href='index.php'>[Return Home]</a>";
   }
 } else {
 
