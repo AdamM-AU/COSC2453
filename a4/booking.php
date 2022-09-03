@@ -283,7 +283,15 @@
 						<span id="mobile-error" class="validation-error"></span><br>
 
 						<br>
-						<input type="checkbox" value="plsRememberMe" id="rememberMe"><label for="rememberMe">Remember Me</label>
+						<span class="radio-btn">
+							<input type="radio" value="plsRememberMe" name="rememberMeRadio" id="rememberMe">
+							<label for="rememberMe">Remember Me</label>
+						</span>
+						<span class="radio-btn">
+							<input type="radio" value="plsForgetMe" name="rememberMeRadio" id="forgetMe">
+							<label for="forgetMe">Forget Me</label>
+						</span>
+						<!-- <input type="checkbox" value="plsRememberMe" id="rememberMe"><label for="rememberMe">Remember Me</label> -->
 						<br>
 						
 						<br>

@@ -34,7 +34,7 @@ function rememberedMe() {
 		document.getElementById('email').value = localStorage.email;
 		document.getElementById('rememberMe').setAttribute("checked", "checked");
 	} else {
-		// Do Nothing
+		document.getElementById('forgetMe').setAttribute("checked", "checked");
 	}
 	
 }
