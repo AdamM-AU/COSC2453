@@ -12,7 +12,7 @@
 	require_once('post-validation.php'); // Special Functions - Adam Mutimer
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		if (!$_POST['retrieve']) {			
+		if (!isset($_POST['retrieve'])) {			
 			$valid = validateBooking();
 			if (!$valid) {
 				// Naughty People are visiting!
@@ -91,6 +91,8 @@
 						echo "\t\t\t\t\t" . "<h3>The Cast:</h3>\n";
 						echo "\t\t\t\t\t" . "<p>" . $movie["Actors"] . "</p><br>\n";
 
+					} else if (isset($_POST['retrieve'])) {
+						// Skip Movie Code Validation
 					} else {
 						echo "<h1 class=\"center\">ERROR: MOVIE CODE INVALID!</h1>";
 						header("Location: index.php");
@@ -316,15 +318,17 @@
 		</main>
 
 		<footer>
-			<form id="retrieve" name="retrieveBooking" method="post">
-				<input type="hidden" name="retrieve" value="true" readonly>
-				<label class="booklabel" for="mobile">Mobile Number:</label>
-				<input type="tel" id="mobile" name="mobile" placeholder="04XXXXXXXX" required>
-				<label class="booklabel" for="email">Email:</label>
-				<input type="email" id="email" name="email" placeholder="YOU@SOMEWHERE.COM" required> 
-				
-				<button id="submit" class="btn btn-primary" type="submit">Get Booking</button>
-			</form>
+			<div class="retrieve">
+				<form id="retrieve" name="retrieveBooking" method="post">
+					<input type="hidden" name="retrieve" value="true" readonly>
+					<label class="booklabel" for="mobile">Mobile Number:</label>
+					<input type="tel" id="mobile" name="mobile" placeholder="04XXXXXXXX" required>
+					<label class="booklabel" for="email">Email:</label>
+					<input type="email" id="email" name="email" placeholder="YOU@SOMEWHERE.COM" required> 
+					
+					<button id="submit" class="btn btn-primary" type="submit">Get Booking</button>
+				</form>
+			</div>
 			<div class="table-grid-footer">
 				<div class="grid-item">info@lunardo.com.au</div>
 				<div class="grid-item">(03) 1234 1234</div>

@@ -81,6 +81,11 @@ iframe {
 	display: block;
 }
 
+.retrieve {
+	text-align: center;
+	margin-top: 20px;
+}
+
 /* Header & targeted items in header */
 header {
 	display: flex;
